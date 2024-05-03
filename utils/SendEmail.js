@@ -13,7 +13,7 @@ export function generateVerificationCode() {
   }
 
 
-// email confirmation acc 
+// email confirmation acc
 export const sendEmailConfirmation = async (email, verificationCode, firstName) => {
 
     const transporter = nodemailer.createTransport({
@@ -41,7 +41,7 @@ export const sendEmailConfirmation = async (email, verificationCode, firstName) 
       The Team
     `;
 
-  // Send verification email
+  // envoyer verification email
   const mailOptions = {
     from: 'Tfa9adni <mansourhayfa4@gmail.com>',
     to: email,

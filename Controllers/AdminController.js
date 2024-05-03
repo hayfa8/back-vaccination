@@ -56,7 +56,7 @@ export const getAdminDashboard = async (req, res) => {
       const [parentCount, doctorCount ] = await Promise.all([
         Doctor.countDocuments({ verified: true }),
         Parent.countDocuments({ verified: true }),
-        // ajouter nb d'enfant
+        // ajouter nombre d'enfant
       ]);
   
       res.json({

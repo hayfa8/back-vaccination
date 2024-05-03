@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.post('/login', login)
 
-router.post('/registerAdmin', registerAdmin) // to delete
+router.post('/registerAdmin', registerAdmin) // to delet
 
 // router.get('/dashboard', getAdminDashboard )
 

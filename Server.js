@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors({ origin: '*' })); 
 
 
-//routes config
+//routes configuration
 app.use('/api/admin' , AdminRoutes)
 app.use('/api/parent' , ParentRoutes)
 app.use('/api/doctor' , DoctorRoutes)
