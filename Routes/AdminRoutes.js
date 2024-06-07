@@ -9,7 +9,7 @@ const router = express.Router()
 
 router.post('/login', login)
 
-router.post('/registerAdmin', registerAdmin) // to delete
+router.post('/registerAdmin', registerAdmin) // juste ll test
 
 router.get('/Non_Verified_Parents',verifyAdminToken , get_Non_Verified_Parents )
 

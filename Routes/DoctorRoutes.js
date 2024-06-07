@@ -7,7 +7,7 @@ import {create_dossier, update_dossier, get_Nb_enfants, get_list_dossier, approv
 
 const router = express.Router()
 
-// **Dossier Medical Routes
+// **routs de dossier medicale
 router.post('/create_dossier', create_dossier);
 router.put('/update_dossier/:childId', update_dossier); 
 router.get('/get_Nb_enfants', get_Nb_enfants);
@@ -19,7 +19,7 @@ router.put('/update_vaccination_true/:childId/:vaccinId', update_VaccinationStat
 router.put('/update_vaccination_false/:childId/:vaccinId', update_VaccinationStatus_false);
 
 
-// **Meeting Management Routes
+// **MRoutes meetings
 router.put('/approve_meeting/:meetingId', approve_meeting); 
 router.put('/decline_meeting/:meetingId', decline_meeting);
 router.get('/get_todays_meetings/:id', get_todays_meetings);

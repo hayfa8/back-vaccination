@@ -9,7 +9,7 @@ export const verifyAdminToken = async (req, res, next) => {
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
-      return res.status(401).json({ message: 'Unauthorized access' });
+      return res.status(401).json({ message: 'Accès non autorisé' });
     }
 
     const decoded = jwt.verify(token, JWT_SECRET);
@@ -18,13 +18,13 @@ export const verifyAdminToken = async (req, res, next) => {
     const admin = await Admin.findById(adminId); 
 
     if (!admin) {
-      return res.status(403).json({ message: 'Forbidden: Insufficient permissions' });
+      return res.status(403).json({ message: 'Interdit : Permissions insuffisantes' });
     }
 
     req.admin = admin; 
     next();
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: 'Invalid token' });
+    return res.status(500).json({ message: 'Jeton invalide' });
   }
 };

@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-// Calculate child's age in months
+// ne7seb 3mor e s8ir bl chhar
 export const ageInMonths = (birthDate) => {
   const birthMoment = moment(birthDate, "DD/MM/YYYY");
   const todayMoment = moment();

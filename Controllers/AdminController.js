@@ -29,7 +29,7 @@ export const registerAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Valider l'unicité de l'e-mail
+// pour valider l'email
     const existingAdmin = await Admin.findOne({ email });
     if (existingAdmin) {
       return res.status(400).json({ message: 'L\'adresse e-mail existe déjà' });

@@ -5,7 +5,7 @@ import moment from "moment"
 export const create_dossier = async (req, res) => {
     const { firstName, lastName, sex, birthday, weight, height, num_medical } = req.body;
   
-    // Valider les données d'entrée
+    // pour valider les données
     if (!firstName || !lastName || !sex || !birthday || !weight || !height || !num_medical) {
       return res.status(400).json({ message: 'Champs requis manquants' });
     }
@@ -30,7 +30,7 @@ export const create_dossier = async (req, res) => {
       const birthdayDate = moment(birthday, formatString);
       const formattedDate = birthdayDate.format('DD/MM/YYYY');
   
-      // Créer un nouveau document Child
+      // Créer un nouveau enfants
       const child = new Child({
         firstName,
         lastName,
@@ -228,9 +228,9 @@ export const decline_meeting = async (req, res) => {
         return res.status(404).json({ message: 'Réunion non trouvée' });
       }
   
-      // Vérifier si la réunion est déjà refusée ou approuvée
-      if (meeting.status === 'declined' || meeting.status === 'approved') {
-        return res.status(400).json({ message: 'Réunion déjà refusée ou approuvée' });
+      // Vérifier si la réunion est déjà refusée
+      if (meeting.status === 'declined') {
+        return res.status(400).json({ message: 'Réunion déjà refusée' });
       }
   
       // Mettre à jour le statut de la réunion en refusé et ajouter une note

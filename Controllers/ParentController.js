@@ -8,7 +8,7 @@ export const assign_child_to_parent = async (req, res) => {
   const { num_medical } = req.body;
   const { parentId } = req.params;
 
-  // Valider les données d'entrée
+  // Valider les inputs
   if (!num_medical) {
     return res.status(400).json({ message: 'Champs requis manquant : num_medical' });
   }
@@ -57,7 +57,7 @@ export const get_all_doctors_names = async (req, res) => {
 export const get_childs = async (req, res) => {
   const { parentId } = req.params;
 
-  // Valider les données d'entrée
+  // Valider les inputs
   if (!parentId) {
     return res.status(400).json({ message: 'Champs requis manquant : parentId' });
   }

@@ -4,43 +4,43 @@ import { Child } from "../Models/childModel.js";
 import { sendPushNotification } from "../Controllers/NotificationController.js";
 import { calculateScheduleDate } from "./calculateScheduleDate.js";
 
-// Define the cron job
+// Définir la tâche cron
 const startCronJob = () => {
   cron.schedule('* * * * *', async () => {
     try {
-      console.log("Cron job started");
+      console.log("La tâche cron a démarré");
       
-      // Fetch children and populate the vaccinId reference
+      // Récupérer les enfants et peupler la référence vaccinId
       const children = await Child.find().populate('vaccin.vaccinId');
-      console.log(`Found ${children.length} children`);
+      console.log(`Trouvé ${children.length} enfants`);
 
       for (const child of children) {
-        console.log(`Processing child: ${child.firstName} ${child.lastName}, Birthday: ${child.birthday}`);
+        console.log(`Traitement de l'enfant : ${child.firstName} ${child.lastName}, Date de naissance : ${child.birthday}`);
         
-        // Get the vaccination ages
+        // Obtenir les âges de vaccination
         const vaccineAges = child.vaccin.map(vaccin => vaccin.vaccinId.age).flat();
-        console.log(`Vaccine ages for ${child.firstName} ${child.lastName}: ${vaccineAges}`);
+        console.log(`Âges des vaccins pour ${child.firstName} ${child.lastName} : ${vaccineAges}`);
         
         const upcomingDates = calculateScheduleDate(child.birthday, vaccineAges);
-        console.log(`Upcoming vaccination dates: ${upcomingDates}`);
+        console.log(`Dates de vaccination à venir : ${upcomingDates}`);
 
         for (const upcomingDate of upcomingDates) {
           const reminderDate = moment(upcomingDate, "DD/MM/YYYY").subtract(2, 'days').format("DD/MM/YYYY");
           const today = moment().format("DD/MM/YYYY");
 
-          console.log(`Upcoming Date: ${upcomingDate}, Reminder Date: ${reminderDate}, Today: ${today}`);
+          console.log(`Date à venir : ${upcomingDate}, Date de rappel : ${reminderDate}, Aujourd'hui : ${today}`);
 
           if (reminderDate === today) {
-            console.log(`Sending notification to parent of child: ${child.firstName} ${child.lastName}`);
-            // Call the function to send the notification
-            await sendPushNotification(child.parentId, `Reminder: Your child ${child.firstName} ${child.lastName} has a vaccination on ${upcomingDate}`);
+            console.log(`Envoi de la notification au parent de l'enfant : ${child.firstName} ${child.lastName}`);
+            // Appeler la fonction pour envoyer la notification
+            await sendPushNotification(child.parentId, `Rappel : Votre enfant ${child.firstName} ${child.lastName} a une vaccination le ${upcomingDate}`);
           }
         }
       }
 
-      console.log("Cron job completed");
+      console.log("La tâche cron est terminée");
     } catch (error) {
-      console.error("Error scheduling reminders:", error);
+      console.error("Erreur lors de la planification des rappels :", error);
     }
   });
 };

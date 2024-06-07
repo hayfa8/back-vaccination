@@ -174,7 +174,7 @@ export const Doctor_Registration = async (req, res) => {
     
     await newDoctor.save();
 
-    // Générer un jeton en cas d'inscription réussie
+    // Générer un jeton aprés l'inscription
     const token = generateToken(newDoctor._id);
   
     await sendEmailConfirmation(newDoctor.email, verificationCode, newDoctor.firstName);
